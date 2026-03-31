@@ -13,3 +13,5 @@ class TestHTMLNode(unittest.TestCase):
         expected = ' href="localhost" target="_blank"'
         self.assertEqual(node.props_to_html(), expected)
 
+if __name__ == "__main__":
+    unittest.main()
