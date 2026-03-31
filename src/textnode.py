@@ -1,17 +1,18 @@
-from enum import Enum
+from src.texttype import TextType
 
-class TextType(Enum):
-    BOLD='bold'
-    ITALIC='italic'
-    CODE='code'
-    LINK='link'
-    IMAGE='image'
 
 class TextNode:
-    def __init__(self, text: str, text_type: TextType, url: str = None) -> None:
+    """Class that represents inline text of HTML and Markdown
+    
+    Arguments:
+    text (str) -- text content of the node
+    text_type (TextType) -- type of test the node contains, member of TextType enum
+    url (str | None) -- url of the node, if applicable (link or image)
+    """
+    def __init__(self, text: str, text_type: TextType, url: str | None = None) -> None:
         self.text: str = text
         self.text_type: TextType = text_type
-        self.url: str = url
+        self.url: str | None = url
 
     def __eq__(self, other: TextNode) -> bool:
         return (
