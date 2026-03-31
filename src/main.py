@@ -1,12 +1,11 @@
-from textnode import TextNode
-from texttype import TextType
+from src.textnode import TextNode
+from src.texttype import TextType
 
 
 def main():
     text_node = TextNode(
             "This is some anchor text",
-            TextType.LINK,
-            "https://www.boot.dev"
+            TextType.BOLD,
         )
 
     print(text_node)

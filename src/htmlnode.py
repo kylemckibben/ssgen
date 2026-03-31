@@ -5,10 +5,10 @@ class HTMLNode:
     """Class that represents HTML tags
 
     Arguments:
-    tag (str | None) -- string representation of the HTML tag
-    value (str | None) -- string representation of the value inside the tag
-    children (List[HTMLNode] | None) -- list of all tags that are children of the current tag
-    props (Dict[str, str] | None) -- dictionary containing attributes in attribute:value format
+    tag -- optional string representation of the HTML tag
+    value -- optional string representation of the value inside the tags
+    children -- options list of all tags that are children of the current tag
+    props -- optional dictionary containing attributes in attribute:value format
     """
     def __init__(
         self, 
@@ -17,10 +17,10 @@ class HTMLNode:
         children: List[HTMLNode] | None = None, 
         props: Dict[str, str] | None = None
     ) -> None:
-        self.tag: str | None = tag
-        self.value: str | None = value
-        self.children: List[HTMLNode] | None = children
-        self.props: Dict[str, str] | None = props
+        self.tag = tag
+        self.value = value
+        self.children = children
+        self.props = props
 
     def to_html(self) -> str:
         """Will be implemented by child classes"""
@@ -31,5 +31,5 @@ class HTMLNode:
         return ' ' + ' '.join([f'{key}="{value}"' for key, value in self.props.items()])
 
     def __repr__(self):
-        return f'HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})'
+        return f'HTMLNode(tag={self.tag}, value={self.value}, children={self.children}, props={self.props})'
 
