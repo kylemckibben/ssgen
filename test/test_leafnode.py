@@ -18,5 +18,6 @@ class TestLeafNode(unittest.TestCase):
         with self.assertRaises(ValueError):
             node_html = node.to_html() 
 
+
 if __name__ == "__main__":
     unittest.main()
