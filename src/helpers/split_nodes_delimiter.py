@@ -1,4 +1,3 @@
-import re
 from typing import List
 from src.textnode import TextNode
 from src.texttype import TextType
@@ -16,24 +15,20 @@ def split_nodes_delimiter(old_nodes: List[TextNode], delimiter: str, text_type: 
     _verify_delimiter_and_type_match(delimiter, text_type)
     new_nodes = []
     for node in old_nodes:
-        if node.text_type != TextType.TEXT:
+        if node.text_type != TextType.TEXT or not node.text.__contains__(delimiter):
             new_nodes.append(node)
-        elif not node.text.__contains__(delimiter):
-            new_nodes.append(node)
-        elif node.text.count(delimiter) % 2 != 0:
-            raise Exception('Error: closing delimiter not found')
         else:
-            search_delim = re.search(re.escape(delimiter) + '.*' + re.escape(delimiter), node.text)
-            open_delim_idx, close_delim_idx = search_delim.span(0)
             split_nodes = []
-            if open_delim_idx > 0:
-                split_nodes.append(TextNode(node.text[:open_delim_idx], TextType.TEXT))
-            if close_delim_idx < len(node.text):
-                split_nodes.append(TextNode(node.text[close_delim_idx:], TextType.TEXT))
-            split_nodes.append(
-                    TextNode(node.text[open_delim_idx+len(delimiter):close_delim_idx-len(delimiter)], 
-                    text_type)
-            )
+            sections = node.text.split(delimiter)
+            if len(sections) % 2 == 0:
+                raise Exception('Error: closing delimiter not found')
+            for i in range(len(sections)):
+                if sections[i] == "":
+                    continue
+                if i % 2 == 0:
+                    split_nodes.append(TextNode(sections[i], TextType.TEXT))
+                else:
+                    split_nodes.append(TextNode(sections[i], text_type))
             new_nodes.extend(split_nodes)
     return new_nodes
 
