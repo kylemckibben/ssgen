@@ -1,9 +1,11 @@
+from typing import List
+
 from src.textnode import TextNode
 from src.texttype import TextType
 from src.helpers.split_markdown import split_nodes_image, split_nodes_link
 from src.helpers.split_nodes_delimiter import split_nodes_delimiter
 
-def text_to_textnodes(text):
+def text_to_textnodes(text: str) -> List[TextNode]:
     """Convert text to all appropriate textnode types
 
     Arguments:

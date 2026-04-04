@@ -1,9 +1,11 @@
+from typing import List
+
 from src.textnode import TextNode
 from src.texttype import TextType
 from src.helpers.extract_markdown import extract_markdown_images, extract_markdown_links
 
 
-def split_nodes_image(old_nodes):
+def split_nodes_image(old_nodes: List[TextNode]) -> List[TextNode]:
     """Split image markdown from text and convert to list of correct node types
 
     Arguments:
@@ -28,7 +30,7 @@ def split_nodes_image(old_nodes):
             new_nodes.extend(split_nodes)
     return new_nodes
 
-def split_nodes_link(old_nodes):
+def split_nodes_link(old_nodes: List[TextNode]) -> List[TextNode]:
     """Split link markdown from text and convert to list of correct node types
     
     Arguments:
