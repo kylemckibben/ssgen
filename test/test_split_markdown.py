@@ -23,7 +23,7 @@ class TestSplitMarkdown(unittest.TestCase):
             ],
         )
 
-    def text_split_images_no_image(self):
+    def test_split_images_no_image(self):
         node = TextNode("This is just text", TextType.TEXT)
         new_nodes = split_nodes_image([node])
         self.assertListEqual(
@@ -46,7 +46,7 @@ class TestSplitMarkdown(unittest.TestCase):
                 TextNode("second link", TextType.LINK, "https://www.eff.org"),
             ],
         )
-    def text_split_link_no_link(self):
+    def test_split_link_no_link(self):
         node = TextNode("This is just text", TextType.TEXT)
         new_nodes = split_nodes_link([node])
         self.assertListEqual(
