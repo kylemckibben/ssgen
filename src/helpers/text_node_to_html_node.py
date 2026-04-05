@@ -1,5 +1,5 @@
-from src.leafnode import LeafNode
-from src.textnode import TextNode
+from src.nodes.leafnode import LeafNode
+from src.nodes.textnode import TextNode
 from src.enums.texttype import TextType
 
 def text_node_to_html_node(text_node: TextNode) -> LeafNode:

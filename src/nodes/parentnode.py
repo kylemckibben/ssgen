@@ -1,5 +1,5 @@
 from typing import Dict
-from src.htmlnode import HTMLNode
+from src.nodes.htmlnode import HTMLNode
 
 class ParentNode(HTMLNode):
     """Class that handles the nesting of HTML nodes

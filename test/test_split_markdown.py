@@ -1,5 +1,5 @@
 import unittest
-from src.textnode import TextNode
+from src.nodes.textnode import TextNode
 from src.enums.texttype import TextType
 from src.helpers.split_markdown import split_nodes_image, split_nodes_link
 

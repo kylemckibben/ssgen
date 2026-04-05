@@ -1,6 +1,6 @@
 from typing import List
 
-from src.textnode import TextNode
+from src.nodes.textnode import TextNode
 from src.enums.texttype import TextType
 from src.helpers.extract_markdown import extract_markdown_images, extract_markdown_links
 

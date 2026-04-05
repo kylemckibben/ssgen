@@ -1,7 +1,7 @@
 import unittest
 
 from src.helpers.text_node_to_html_node import text_node_to_html_node
-from src.textnode import TextNode
+from src.nodes.textnode import TextNode
 from src.enums.texttype import TextType
 
 class TestTextNodeToHTMLNode(unittest.TestCase):
