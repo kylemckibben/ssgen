@@ -1,6 +1,6 @@
 import unittest
 from src.textnode import TextNode
-from src.texttype import TextType
+from src.enums.texttype import TextType
 from src.helpers.text_to_textnodes import text_to_textnodes
 
 class TestTextToTextnodes(unittest.TestCase):

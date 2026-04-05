@@ -1,6 +1,6 @@
 import unittest
 
-from src.blocktype import BlockType
+from src.enums.blocktype import BlockType
 from src.helpers.block_to_block_type import block_to_block_type
 
 class TestBlockToBlockType(unittest.TestCase):

@@ -1,4 +1,4 @@
-from src.texttype import TextType
+from src.enums.texttype import TextType
 
 
 class TextNode:

@@ -1,4 +1,4 @@
-from src.blocktype import BlockType
+from src.enums.blocktype import BlockType
 
 def block_to_block_type(block: str) -> BlockType:
     """Returns the block type of the given markdown block

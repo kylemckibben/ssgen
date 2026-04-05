@@ -1,7 +1,7 @@
 import unittest
 
 from src.textnode import TextNode
-from src.texttype import TextType
+from src.enums.texttype import TextType
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):

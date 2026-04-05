@@ -2,7 +2,7 @@ import unittest
 
 from src.helpers.text_node_to_html_node import text_node_to_html_node
 from src.textnode import TextNode
-from src.texttype import TextType
+from src.enums.texttype import TextType
 
 class TestTextNodeToHTMLNode(unittest.TestCase):
     def test_text(self):
