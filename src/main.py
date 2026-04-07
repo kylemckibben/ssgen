@@ -1,14 +1,11 @@
-from src.nodes.textnode import TextNode
-from src.enums.texttype import TextType
+import os
 
+from src.helpers.populate_public_dir import populate_public_dir
 
 def main():
-    text_node = TextNode(
-            "This is some anchor text",
-            TextType.BOLD,
-        )
+    path = os.path.abspath('./public/')
+    populate_public_dir(path)
 
-    print(text_node)
 
 
 if __name__ == "__main__":
