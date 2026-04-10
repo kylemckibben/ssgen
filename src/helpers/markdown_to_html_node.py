@@ -11,7 +11,7 @@ from src.nodes.parentnode import ParentNode
 from src.nodes.textnode import TextNode
 
 
-def markdown_to_html_node(markdown: str) -> HTMLNode:
+def markdown_to_html_node(markdown: str) -> str:
     """Converts full markdown document into HTML by checking each block of
         the document. Handles nested structures (like lists) to add inner
         elements by first converting to Parent and Leaf nodes accordingly,
@@ -29,30 +29,42 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
         # Code blocks get nested into a <pre> element
         if block_type == BlockType.CODE:
             html_nodes.append(ParentNode("pre", [
-                ParentNode("code", [
+                ParentNode(tag, [
                     text_node_to_html_node(TextNode(value, TextType.TEXT))
                 ])
             ]))
-            continue
+        # Quotes get '>' stripped from the front of each line
+        elif block_type == BlockType.QUOTE:
+            quote_body = []
+            lines = block.split('\n')
+            for line in lines:
+                print(f'current line of quote: {line}')
+                quote_body.append(line[1:])
+            quote = ''.join(quote_body)
+            quote = quote.strip()
+            print(f'quote: {quote}')
+            html_nodes.append(ParentNode(tag, _get_children(quote)))
         # Unordered lists get nested list elements with list syntax omitted
         elif block_type == BlockType.UNORDERED_LIST:
             list_nodes = []
             lines = block.split('\n')
             for line in lines:
+                print(f'current line of unordered list: {line}')
                 list_nodes.append(ParentNode("li", _get_children(line[2:])))
-            html_nodes.append(ParentNode("ul", [ParentNode("li", list_nodes)]))
-            continue
+            print(f'unordered list items ({len(list_nodes)} items): {list_nodes.__repr__()}')
+            html_nodes.append(ParentNode("ul", list_nodes))
         # Ordered lists get nested list elements with numbered syntax omitted
         elif block_type == BlockType.ORDERED_LIST:
             list_nodes = []
             list_count = 1
             lines = block.split('\n')
             for line in lines:
+                print(f'current line of ordered list: {line}')
                 line_num = f'{list_count}. '
-                list_nodes.append(ParentNode("li", _get_children(line[len(line_num)])))
+                list_nodes.append(ParentNode("li", _get_children(line[len(line_num):])))
                 list_count += 1
-            html_nodes.append(ParentNode("ol", [ParentNode("li", list_nodes)]))
-            continue
+            print(f'ordered list items ({len(list_nodes)} items): {list_nodes.__repr__()}')
+            html_nodes.append(ParentNode("ol", list_nodes))
         # Paragraphs need newlines converted to spaces
         elif block_type == BlockType.PARAGRAPH:
             remove_white_space = " ".join(value.split('\n'))
@@ -60,7 +72,7 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
         # All other block types just use the original value returned
         else:
             html_nodes.append(ParentNode(tag, _get_children(value)))
-    return ParentNode("div", html_nodes)
+    return ParentNode("div", html_nodes).to_html()
 
 def _get_tag(block_type: str, block: str) -> str:
     """Determine parent tag of the given markdown block.
